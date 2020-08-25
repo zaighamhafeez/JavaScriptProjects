@@ -98,3 +98,12 @@ h2 {
     font-size: 16px;
 
 }
+
+button.home {
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+}
