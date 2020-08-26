@@ -1,31 +1,32 @@
+
 const form = document.getElementById('form');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
-const password2 = document.getElementById('password2');
+const cpassword = document.getElementById('confirmpassword');
 
-
-// All Functions
-// #1 Function to show error
-function showError(input, message) {
+//All functions 
+// Function to show error.
+function showError(input,message) {
     const formcontrol = input.parentElement;
     formcontrol.className = 'form-control error';
     const small = formcontrol.querySelector('small');
     small.innerText = message;
 }
 
-// #2 Function to show success
+// Function to show success.
 function showSuccess(input) {
     const formcontrol = input.parentElement;
     formcontrol.className = 'form-control success';
 }
 
 
-// #3 Function to check if required field have data
+// Function to check required input fields
 function checkRequired(inputArray) {
     inputArray.forEach(function(input){
-        if (input.value === ""){
+        if (input.value === ''){
             showError(input, `${getFieldId(input)} is required`);
+
         } else {
             showSuccess(input);
         }
@@ -37,16 +38,16 @@ function getFieldId(input) {
     return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
-// Fuction to check length of input field
-function checkLength(input,min,max) {
-    if(input.value != "") {
-    if (input.value.length < min) {
-    showError(input,`${getFieldId(input)} need to at least ${min} characters`)
-} else if (input.value.length > max) {
-    showError(input,`${getFieldId(input)} need to less than ${max} characters`)
-} else {
-    showSuccess(input);
-}
+// Function to check lenght of input field
+function checkLenght(input,min,max) {
+    if(input.value !=""){
+        if (input.value.lenght < min){
+            showError(input, `${gerFeildId(input)} need to at least ${min} characters `)
+        } else if (input.value.lenght > max) {
+            showError(input,`${getFieldId(input)} need to less than ${max} characters`)
+        } else {
+            showSuccess(input);
+        }
     }
 }
 
@@ -60,21 +61,23 @@ function checkEmail(input) {
     }
 }
 
-// Fuction to check if password and confirm password is same
-function checkPasswordsMatch(input1, input2) {
+//Function to check password and confirm password is same.
+function checkPasswordsMatch(input1,input2) {
     if (input1.value !== input2.value) {
-        showError(input2,"Password don't match")
+        showSuccess(input2, "Password don't same")
     }
 }
 
 
-// this is an event listener >>>> form on submit
+// this is an event listener for form submit botton.
 form.addEventListener('submit', function(e){
     e.preventDefault();
-    
-    checkRequired([username,email,password,password2]);
+    checkRequired([username,email,password,cpassword]);
     checkEmail(email);
-    checkLength(username,3,10);
-    checkLength(password,6,30);
-    checkPasswordsMatch(password,password2);
+    checkLenght(username,3,10);
+    checkLenght(password,6,10);
+    checkPasswordsMatch(password,cpassword);
+
+
+
 })
